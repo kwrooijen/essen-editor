@@ -1,11 +1,10 @@
 (ns essen-editor.views
   (:require
    [re-frame.core :as re-frame]
-   [essen-editor.subs :as subs]
-   ))
+   [essen-editor.events :as event]
+   [essen-editor.subs :as subs]))
+
 
 (defn main-panel []
-  (let [name (re-frame/subscribe [::subs/name])]
-    [:div
-     [:h1 "Hello from " @name]
-     ]))
+  (re-frame/dispatch [::event/read-file "/Users/kwrooijen/example.clj"])
+  [:div "Hello"])

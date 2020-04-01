@@ -1,6 +1,14 @@
 {
+  "main": "resources/public/main.js",
   "devDependencies": {
-    "shadow-cljs": "2.8.83"
+    "shadow-cljs": "2.8.83",
+    "electron": "^7.1.9",
+    "path": "^0.12.7",
+    "source-map-support": "^0.5.16",
+    "ws": "^7.2.1"
+  },
+  "scripts": {
+    "dev": "./node_modules/.bin/shadow-cljs watch main app"
   },
   "dependencies": {
     "react": "16.9.0",
