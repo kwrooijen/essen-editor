@@ -1,12 +1,12 @@
 (ns essen-editor.core
   (:require
-   [essen-editor.fs :refer [fs]]
+   [essen-editor.events.keyboard]
+   [essen-editor.req :refer [fs parinfer]]
    [reagent.core :as reagent]
    [re-frame.core :as re-frame]
    [essen-editor.events :as events]
    [essen-editor.views :as views]
-   [essen-editor.config :as config]
-   ))
+   [essen-editor.config :as config]))
 
 (defn dev-setup []
   (when config/debug?
@@ -21,10 +21,10 @@
 (defn ^:dev/after-load mount-root []
   (re-frame/clear-subscription-cache!)
   (reagent/render [views/main-panel]
-                  (.getElementById js/document "app")))
+    (.getElementById js/document "app")))
 
 (defn init []
   (re-frame/dispatch-sync [::events/initialize-db])
-  (wait-for (fn [] fs) (fn []))
+  (wait-for (fn [] (and fs parinfer)) (fn []))
   (dev-setup)
   (mount-root))
